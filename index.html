@@ -18,14 +18,13 @@
 <body>
     <button onclick="switchFrame('wikipedia')">Wikipedia</button>
     <button onclick="switchFrame('react')">React App</button>
-    <button onclick="switchFrame('angular')">Angular App</button>
+    <button onclick="switchFrame('vue')">Vue App</button>
 
     <button onclick="startTimer()">Start Timer</button>
     
-
     <iframe id="wikipedia" class="active" src="https://www.wikipedia.org"></iframe>
-    <iframe id="react" src="react-app.html"></iframe> <!-- Assuming React app is in this HTML -->
-    <iframe id="angular" src="vue-app.html"></iframe> <!-- Assuming Angular app is in this HTML -->
+    <iframe id="react" src="react-app.html"></iframe> 
+    <iframe id="vue" src="vue-app.html"></iframe> 
 
     <script>
         function switchFrame(id) {
@@ -38,7 +37,7 @@
             const timer = setInterval(() => {
                 if (counter === 0) {
                     clearInterval(timer);
-                    switchFrame('wikipedia'); // Switch to the Wikipedia iframe
+                    switchFrame('wikipedia');
                 } else {
                     console.log(`Switching to Wikipedia in ${counter} seconds...`);
                     counter--;
