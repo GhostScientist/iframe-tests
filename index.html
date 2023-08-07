@@ -16,52 +16,47 @@
     </style>
 </head>
 <body>
-    <button onclick="switchFrame('wikipedia')">Wikipedia</button>
-    <button onclick="switchFrame('react')">React App</button>
-    <button onclick="switchFrame('vue')">Vue App</button>
-    <button onclick="switchFrame('angular')">Angular App</button>
+    <h1>Hello!</h1>
 
-    <button onclick="startTimer()">Start Timer</button>
-    <button onclick="randomDancing()">Random Dancing!</button>
-    
-    <iframe id="wikipedia" class="active" src="https://www.wikipedia.org"></iframe>
-    <iframe id="react" src="react-app.html"></iframe> 
-    <iframe id="vue" src="vue-app.html"></iframe>
-    <iframe id="angular" src="angular-app.html"></iframe> 
+    <button onclick="addFrameForReact()">Add React</button>
 
     <script>
-        function switchFrame(id) {
-            document.querySelectorAll('iframe').forEach(frame => frame.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
+        if (window === window.parent) {
+            console.log("adding iframe for index.html");
+            var currentLocation = window.location.href;
+    
+            var iframe = document.createElement('iframe');
+            iframe.src = currentLocation;
+            iframe.width = '100%';
+            iframe.height = '80vh';
+            iframe.style.border = 'none';
+            iframe.style.display = 'block';
+            iframe.className = 'active';
+    
+            document.body.innerHTML = '';
+            document.body.appendChild(iframe);
+        } else {
+            console.log("I'm already inside an iframe!");
         }
 
-        function startTimer() {
-            let counter = 5;
-            const timer = setInterval(() => {
-                if (counter === 0) {
-                    clearInterval(timer);
-                    switchFrame('wikipedia');
-                } else {
-                    console.log(`Switching to Wikipedia in ${counter} seconds...`);
-                    counter--;
-                }
-            }, 1000);
-        }
+        function addFrameForReact() {
+            var existingIframe = document.getElementById('react');
 
-        function randomDancing() {
-            let counter = 25;
-            let options = ["wikipedia", "react", "vue", "angular"];
-            
-            const timer = setInterval(() => {
-                let choice = options[Math.floor(Math.random()*options.length)];
-                if (counter === 0) {
-                    console.log("Stopping interval");
-                    clearInterval(timer);
-                } else {
-                    switchFrame(choice);
-                    counter--;
-                }
-            }, 250);
+            if (existingIframe) {
+                console.log("React iframe already exists.");
+                return;
+            }
+
+            var iframe = document.createElement('iframe');
+            iframe.id = 'react';
+            iframe.src = 'react-app.html'; 
+            iframe.width = '100%';
+            iframe.height = '80vh';
+            iframe.style.border = 'none';
+            iframe.style.display = 'block';
+            iframe.className = 'active';
+
+            document.body.appendChild(iframe);
         }
     </script>
 </body>
