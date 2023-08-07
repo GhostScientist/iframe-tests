@@ -1,31 +1,45 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Hello World</title>
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  </head>
-  <body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My React App</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+</head>
+<body>
     <div id="root"></div>
-    <script type="text/babel">
-    
-      function MyApp() {
-        const [count, setCount] = React.useState(0);
+    <script type="text/javascript">
+        if (window === window.parent) {
+            console.log("adding iframe for react-app.html");
+            var currentLocation = window.location.href;
 
-            return React.createElement('div', null,
-                React.createElement('h1', null, `React Count: ${count}`),
-                React.createElement('button', { onClick: () => setCount(count + 1) }, 'Plus'),
-                React.createElement('button', { onClick: () => setCount(count - 1) }, 'Minus')
+            var iframe = document.createElement('iframe');
+            iframe.src = 'react-app.html';
+            iframe.width = '100%';
+            iframe.height = '100%';
+            iframe.style.border = 'none';
+
+            document.body.appendChild(iframe);
+        } else {
+            const MyApp = () => {
+                const [count, setCount] = React.useState(0);
+
+                const isInIFrame = window !== window.parent;
+
+                return React.createElement('div', null,
+                    React.createElement('h1', null, `Count: ${count}`),
+                    isInIFrame ? React.createElement('h2', null, "I'm in an iframe!") : React.createElement('h2', null, "I'm NOT in an iframe!"),
+                    React.createElement('button', { onClick: () => setCount(count + 1) }, 'Plus'),
+                    React.createElement('button', { onClick: () => setCount(count - 1) }, 'Minus')
+                );
+            };
+
+            ReactDOM.render(
+                React.createElement(MyApp, null),
+                document.getElementById('root')
             );
-      }
-
-      const container = document.getElementById('root');
-      const root = ReactDOM.createRoot(container);
-      root.render(<MyApp />);
-
+        }
     </script>
-  </body>
+</body>
 </html>
