@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Angular App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script type="text/javascript">
+        var app = angular.module('myApp', []);
+
+        app.controller('MyController', function($scope) {
+            $scope.count = 0;
+            $scope.increment = function() {
+                $scope.count++;
+            };
+            $scope.decrement = function() {
+                $scope.count--;
+            };
+        });
+    </script>
+</head>
+<body ng-controller="MyController">
+    <h1>Angular Count: {{count}}</h1>
+    <button ng-click="increment()">Plus</button>
+    <button ng-click="decrement()">Minus</button>
+</body>
+</html>
