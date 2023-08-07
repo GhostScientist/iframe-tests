@@ -22,6 +22,7 @@
     <button onclick="switchFrame('angular')">Angular App</button>
 
     <button onclick="startTimer()">Start Timer</button>
+    <button onclick="randomDancing()">Random Dancing!</button>
     
     <iframe id="wikipedia" class="active" src="https://www.wikipedia.org"></iframe>
     <iframe id="react" src="react-app.html"></iframe> 
@@ -45,6 +46,22 @@
                     counter--;
                 }
             }, 1000);
+        }
+
+        function randomDancing() {
+            let counter = 25;
+            let options = ["wikipedia", "react", "vue", "angular"];
+            
+            const timer = setInterval(() => {
+                let choice = options[Math.floor(Math.random()*options.length)];
+                if (counter === 0) {
+                    console.log("Stopping interval");
+                    clearInterval(timer);
+                } else {
+                    switchFrame(choice);
+                    counter--;
+                }
+            }, 250);
         }
     </script>
 </body>
